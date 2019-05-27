@@ -23,8 +23,8 @@ before_install:
     - echo "extends-cache = $HOME/buildout-cache/extends" >> $HOME/.buildout/default.cfg
     - echo "abi-tag-eggs = true" >> $HOME/.buildout/default.cfg
 
-install:
-    - travis_retry pip install -U setuptools==33.1.1 tox coveralls coverage
+# install:
+#     -
 
 #before_script:
 #    - export DISPLAY=:99.0
@@ -34,8 +34,9 @@ install:
 script:
     - virtualenv .
     - source bin/activate
+    - travis_retry pip install -U setuptools==33.1.1 tox coveralls coverage
     - echo "virtualenv activated"
-    - pip install -r requirements.txt
+    - travis_retry pip install -r requirements.txt
     - echo "Successfully installed requirements. Building version_plone51"
     # - ./bin/buildout -c version_plone51.cfg
     - travis_retry tox
