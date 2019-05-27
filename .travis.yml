@@ -32,14 +32,17 @@ install:
 #    - firefox -v
 
 script:
-    - travis_retry tox
+    - virtualenv env
+    - source ./env/bin/activate
+    - echo "virtualenv activated"
+    # - travis_retry tox
 
-after_success:
-    - coverage combine
-    - coveralls
+# after_success:
+    # - coverage combine
+    # - coveralls
 
-notifications:
-    email: false
+# notifications:
+    # email: false
 
 cache:
     pip: true
