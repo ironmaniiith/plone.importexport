@@ -38,8 +38,8 @@ script:
     - echo "virtualenv activated"
     - travis_retry pip install -r requirements.txt
     - echo "Successfully installed requirements. Building version_plone51"
-    # - ./bin/buildout -c version_plone51.cfg
-    - travis_retry tox
+    - ./bin/buildout -c version_plone51.cfg
+    # - travis_retry tox
 
 # after_success:
     # - coverage combine
