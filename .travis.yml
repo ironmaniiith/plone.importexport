@@ -9,15 +9,12 @@ matrix:
 #       - python: "3.6"
 #         env: TOXENV=docs,lint-py36
         - python: "2.7"
-          env:
-            - TOXENV=py27-Plone50
+          env: TOXENV=py27-Plone50
         - python: "2.7"
-          env:
-            - TOXENV=py27-Plone51
-
-   allow_failures:
-       - python: "3.6"
-         env: TOXENV=py36-Plone52
+          env: TOXENV=py27-Plone51
+    allow_failures:
+        - python: "3.6"
+          env: TOXENV=py36-Plone52
 
 before_install:
     - mkdir -p $HOME/buildout-cache/{downloads,eggs,extends}
