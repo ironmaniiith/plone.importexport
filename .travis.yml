@@ -9,7 +9,9 @@ matrix:
 #        - python: "3.6"
 #          env: TOXENV=docs,lint-py36
         - python: "2.7"
-          env: TOXENV=py27-Plone51
+          env:
+            - TOXENV=py27-Plone51
+            - VERSION_FILE=version_plone51.cfg
 #    allow_failures:
 #        - python: "3.6"
 #          env: TOXENV=py36-Plone52
