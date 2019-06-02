@@ -32,14 +32,9 @@ before_install:
 #    - firefox -v
 
 script:
-    - virtualenv .
-    - source bin/activate
     - travis_retry pip install -U setuptools==33.1.1 tox coveralls coverage
-    - echo "virtualenv activated"
     - travis_retry pip install -r requirements.txt
-    - echo "Successfully installed requirements. Building version_plone51"
-    - ./bin/buildout -c version_plone51.cfg
-    # - travis_retry tox
+    - travis_retry tox
 
 # after_success:
     # - coverage combine
