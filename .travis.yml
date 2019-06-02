@@ -4,10 +4,10 @@ sudo: false
 
 matrix:
     include:
-       # - python: "2.7"
-       #   env: TOXENV=docs,lint-py27,code-analysis
-       # - python: "3.6"
-       #   env: TOXENV=docs,lint-py36
+#       - python: "2.7"
+#         env: TOXENV=docs,lint-py27,code-analysis
+#       - python: "3.6"
+#         env: TOXENV=docs,lint-py36
         - python: "2.7"
           env:
             - TOXENV=py27-Plone50
