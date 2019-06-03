@@ -16,7 +16,9 @@ matrix:
         - python: "3.6"
           env: TOXENV=py36-Plone52
 
+
 script:
+    - travis cache --delete
     - travis_retry pip install -U setuptools==33.1.1 tox coveralls coverage
     - travis_retry pip install -r requirements.txt
     - travis_retry tox
