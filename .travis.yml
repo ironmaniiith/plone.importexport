@@ -4,26 +4,20 @@ sudo: false
 
 matrix:
     include:
-#       - python: "2.7"
-#         env: TOXENV=docs,lint-py27,code-analysis
-#       - python: "3.6"
-#         env: TOXENV=docs,lint-py36
         - python: "2.7"
-          env: TOXENV=py27-Plone50
+          env: VERSION_FILE=version_plone50.cfg
         - python: "2.7"
-          env: TOXENV=py27-Plone51
-    allow_failures:
-        - python: "3.6"
-          env: TOXENV=py36-Plone52
+          env: VERSION_FILE=version_plone51.cfg
 
 script:
-    - travis_retry pip install -U setuptools==33.1.1 tox coveralls coverage
-    - travis_retry pip install -r requirements.txt
-    - travis_retry tox
+    - virtualenv . && source ./bin/activate
+    - pip install -r requirements.txt
+    - ./bin/buildout -c "$VERSION_FILE"
 
 after_success:
-    - coverage combine
-    - coveralls
+    - echo 'Yeah...'
+    # - coverage combine
+    # - coveralls
 
 notifications:
     email: false
@@ -32,4 +26,3 @@ cache:
     pip: true
     directories:
       - eggs
-      - $HOME/buildout-cache
