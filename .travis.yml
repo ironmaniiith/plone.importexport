@@ -16,15 +16,6 @@ matrix:
         - python: "3.6"
           env: TOXENV=py36-Plone52
 
-before_install:
-    - mkdir -p $HOME/buildout-cache/{downloads,eggs,extends}
-    - mkdir $HOME/.buildout
-    - echo "[buildout]" > $HOME/.buildout/default.cfg
-    - echo "download-cache = $HOME/buildout-cache/downloads" >> $HOME/.buildout/default.cfg
-    - echo "eggs-directory = $HOME/buildout-cache/eggs" >> $HOME/.buildout/default.cfg
-    - echo "extends-cache = $HOME/buildout-cache/extends" >> $HOME/.buildout/default.cfg
-    - echo "abi-tag-eggs = true" >> $HOME/.buildout/default.cfg
-
 script:
     - travis_retry pip install -U setuptools==33.1.1 tox coveralls coverage
     - travis_retry pip install -r requirements.txt
