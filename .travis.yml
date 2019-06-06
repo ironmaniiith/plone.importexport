@@ -1,37 +1,17 @@
-# custom
 language: python
 sudo: false
 
 matrix:
     include:
-#       - python: "2.7"
-#         env: TOXENV=docs,lint-py27,code-analysis
-#       - python: "3.6"
-#         env: TOXENV=docs,lint-py36
         - python: "2.7"
-          env: TOXENV=py27-Plone50
-        - python: "2.7"
-          env: TOXENV=py27-Plone51
-    allow_failures:
-        - python: "3.6"
-          env: TOXENV=py36-Plone52
-
+          env: VERSION_FILE=version_plone51.cfg
 
 script:
-    - travis cache --delete
-    - travis_retry pip install -U setuptools==33.1.1 tox coveralls coverage
-    - travis_retry pip install -r requirements.txt
-    - travis_retry tox
-
-after_success:
-    - coverage combine
-    - coveralls
+    - virtualenv . && source ./bin/activate && echo "Virtualenv successfully activated"
+    - pip install -U setuptools==36.2.1
+    - pip install -r requirements.txt
+    - ./bin/buildout -c "$VERSION_FILE"
+    - ./bin/test
 
 notifications:
     email: false
-
-cache:
-    pip: true
-    directories:
-      - eggs
-      - $HOME/buildout-cache
