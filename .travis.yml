@@ -7,10 +7,12 @@ matrix:
           env: VERSION_FILE=version_plone51.cfg
 
 script:
-    - pip install -U pip
+    - virtualenv . && source ./bin/activate && echo "Virtualenv successfully activated"
+    - python --version
+    - pip --version
     - pip install -r requirements.txt
-    - ./bin/buildout -c "$VERSION_FILE" && echo "Buildout ran successfully"
-    - ./bin/test && echo "Tests ran successfully"
+    - ./bin/buildout -c "$VERSION_FILE"
+    - ./bin/test
 
 notifications:
     email: false
