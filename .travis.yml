@@ -12,6 +12,7 @@ script:
     - pip --version
     - pip install -r requirements.txt
     - ./bin/buildout -c "$VERSION_FILE"
+    - pip install plone.directives.form
     - ./bin/test
 
 notifications:
