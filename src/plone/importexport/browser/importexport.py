@@ -298,10 +298,12 @@ class ImportExportView(BrowserView):
                 title = new_id
         else:
             new_id = id_
+
         path_ = "{parent_path}/{new_id}".format(
             parent_path="/".join(parent_path),
             new_id=new_id
         )
+
         # check if context exists
         if not obj.get(new_id, None):
 
@@ -397,7 +399,6 @@ class ImportExportView(BrowserView):
             self.createcontent(obj_data)
 
         for obj_data in items_waiting_on_parent:
-            print obj_data
             log += self.createcontent(obj_data, createAncestry=True)
 
         return log
@@ -632,10 +633,13 @@ class ImportExportView(BrowserView):
             # convert csv to json
             data = self.conversion.converttojson(
                 data=self.files.getCsv(), header=include)
+
             error_log += self.processContentCreation(data=data)
 
             # map old and new UID in memory
             self.mapping.mapNewUID(data)
+            self.reindexMatchedTraversalPaths()
+            error_log += self.deleteNoMatchingContent()
 
             self.reindexMatchedTraversalPaths()
             error_log += self.deleteNoMatchingContent()
@@ -651,6 +655,9 @@ class ImportExportView(BrowserView):
                     continue
                 obj_absolute_path = "/".join(self.getobjpath(path_.split(os.sep)))
                 if obj_absolute_path not in self.matchedTraversalPaths:
+                    continue
+
+                if path_ not in self.matchedTraversalPaths:
                     continue
 
                 # get blob content into json data
